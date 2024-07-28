@@ -6,17 +6,25 @@ body {
   padding: 20px;
 }
 
+h1 {
+  font-size: 2em;
+  color: #ff1493;
+}
+
+.balloon-container {
+  display: inline-block;
+  margin: 10px;
+  position: relative;
+}
+
 .balloon {
   width: 100px;
   height: 150px;
   background-color: #ff69b4;
   border-radius: 50% 50% 0 0;
   position: relative;
-  display: inline-block;
-  margin: 10px;
   cursor: pointer;
-  transition: transform 0.3s ease;
-  animation: float 1.5s infinite ease-in-out;
+  transition: transform 0.2s ease, background-color 0.2s ease;
 }
 
 .balloon:after {
@@ -25,7 +33,7 @@ body {
   height: 50px;
   background-color: #ff69b4;
   position: absolute;
-  bottom: 0;
+  bottom: -50px;
   left: 45px;
 }
 
@@ -41,17 +49,13 @@ body {
   opacity: 1;
 }
 
-.pop-animation {
-  animation: pop 0.5s ease forwards;
-}
-
 @keyframes pop {
   0% {
     transform: scale(1);
     opacity: 1;
   }
   50% {
-    transform: scale(1.1);
+    transform: scale(1.2);
     opacity: 0.7;
   }
   100% {
@@ -61,33 +65,23 @@ body {
 }
 
 @keyframes float {
-  0% {
+  0%, 100% {
     transform: translateY(0);
   }
   50% {
     transform: translateY(-10px);
   }
-  100% {
-    transform: translateY(0);
-  }
 }
 
-#balloons {
-  display: flex;
-  justify-content: center;
-  flex-wrap: wrap;
-}
-
-.balloon-container {
-  position: relative;
-  display: inline-block;
+.balloon-container .balloon {
+  animation: float 1.5s ease-in-out infinite;
 }
 
 .balloon-container .balloon:hover {
-  transform: scale(1.05);
   background-color: #ff1493;
+  transform: scale(1.05);
 }
 
-.balloon-container .balloon:active {
-  transform: scale(0.95);
+.balloon-container .balloon.pop-animation {
+  animation: pop 0.5s ease forwards;
 }
